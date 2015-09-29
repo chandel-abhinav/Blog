@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :posts
-
+  resources :comments
   get '/posts/comment' => 'posts#save_comment'
 
   #map.resources :comments, :path_prefix => '/:commentable_type/:commentable_id'

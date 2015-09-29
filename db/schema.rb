@@ -11,17 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929122427) do
+ActiveRecord::Schema.define(version: 20150929131724) do
 
   create_table "comments", force: :cascade do |t|
-    t.integer  "post_id",    limit: 4
-    t.string   "title",      limit: 255
-    t.text     "comment",    limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "title",            limit: 255
+    t.text     "comment",          limit: 65535
+    t.integer  "commentable_id",   limit: 4
+    t.string   "commentable_type", limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
-
-  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -61,5 +60,4 @@ ActiveRecord::Schema.define(version: 20150929122427) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
-  add_foreign_key "comments", "posts"
 end

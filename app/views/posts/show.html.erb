@@ -15,4 +15,35 @@
    </p>
 <% end %>
 
-
+<h2>Comments</h2>
+<% @comments.each do |comment| %>
+  <p>
+    <strong>Comment Title:</strong>
+    <%= comment.title %>
+  </p>
+ 
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.comment %>
+  </p>
+<% end %>
+ 
+<h2>Add a comment:</h2>
+<%= form_for :comment, url: comments_path do |f| %>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :comment %><br>
+    <%= f.text_area :comment %>
+  </p>
+  <p>
+  	 <%= f.hidden_field :commentable_id, :value => @article[:id] %>
+  	 <%= f.hidden_field :commentable_type, :value => 'Post' %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+ 
+<% end %>

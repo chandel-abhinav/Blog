@@ -18,19 +18,21 @@ class PostsController < ApplicationController
 	end
 
 	def show
-		@article = Post.find(params[:id])
-		#@comments = @article.comments.recent.limit(10).all
+		#@article = Post.find(params[:id])
+		commentable = Post.find(params[:id])
+		@article = commentable
+		@comments = commentable.comments.all
 		@tags = @article.tag
 	end
 
 	def save_comment
 		comment_params
-		@article = Post.find(params[:article_id])
-		@comment = @article.comments.create
+		commentable = Post.find(params[:article_id])
+		@comment = commentable.comments.create
 		@comment.title = params[:title]
 		@comment.comment = params[:comment]
 		if @comment.save
-			redirect_to @article
+			redirect_to commentable
 		else
 			render 'show'
 		end
