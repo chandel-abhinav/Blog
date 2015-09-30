@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :posts
+  resources :users
+  resources :posts
   resources :comments
   get '/posts/comment' => 'posts#save_comment'
 

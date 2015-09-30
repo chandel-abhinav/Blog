@@ -11,7 +11,7 @@ gem 'acts_as_commentable'
 
 gem 'acts-as-taggable-on', '~> 3.4'
 
-gem 'friendly_id'
+gem 'friendly_id', '~> 5.1.0'
 
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

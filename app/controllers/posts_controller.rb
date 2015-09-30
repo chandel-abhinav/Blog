@@ -9,6 +9,8 @@ class PostsController < ApplicationController
 
 	def create
 		@article = Post.new(blog_params)
+		#@article.slug = nil
+		#d@article.slug = nil
 		#@article.tag_list.add("awesome, slick")
 		if @article.save
 			redirect_to @article
@@ -19,7 +21,7 @@ class PostsController < ApplicationController
 
 	def show
 		#@article = Post.find(params[:id])
-		commentable = Post.find(params[:id])
+		commentable = Post.friendly.find(params[:id])
 		@article = commentable
 		@comments = commentable.comments.all
 		@tags = @article.tag
