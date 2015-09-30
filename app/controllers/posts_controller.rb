@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+	before_action :authenticate_user!
 	def index
 		@articles = Post.all
 	end
@@ -8,6 +9,7 @@ class PostsController < ApplicationController
 	end
 
 	def create
+		#authorize! :create, Post
 		@article = Post.new(blog_params)
 		#@article.slug = nil
 		#d@article.slug = nil
@@ -46,6 +48,11 @@ class PostsController < ApplicationController
 	  redirect_to posts_path
 	end
 
+	def print_session
+		
+	end
+
+
 	private
 	def blog_params
 		params.require(:article).permit(:title,:body,:tag_list)
@@ -54,5 +61,7 @@ class PostsController < ApplicationController
 	def comment_params
 		params.require(:comment).permit(:article_id,:title,:comment)
 	end
+
+
 
 end

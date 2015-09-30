@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
+  #devise_for :users
   resources :posts
-  resources :users
-  resources :posts
+  #resources :users
+  #resources :posts
   resources :comments
   get '/posts/comment' => 'posts#save_comment'
-
+  #devise_for :users, controllers: { sessions: "users/sessions" }
+  devise_for :users, path: "auth", path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', 
+    confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
+  root 'posts#index'
+  #root 'posts#index'
   #map.resources :comments, :path_prefix => '/:commentable_type/:commentable_id'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

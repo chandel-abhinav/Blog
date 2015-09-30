@@ -13,6 +13,10 @@ gem 'acts-as-taggable-on', '~> 3.4'
 
 gem 'friendly_id', '~> 5.1.0'
 
+gem 'devise'
+
+gem 'cancancan', '~> 1.10'
+
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>=  1.3.0'
