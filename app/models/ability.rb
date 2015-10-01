@@ -28,11 +28,34 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
-    #can :read, :all
-    #can :create, :all
-    #cannot :update, Post.unowned
-    #cannot :update, Comment.unowned
-    #cannot :destroy, Post.unowned
-    #cannot :destory, Comment.unowned
+    can :read, :all
+    can :create, :all
+    #File.write('current_user_authorization_test', 'Last written')
+    cannot [:update,:destroy], Post
+    can [:update,:destroy], Post, :user_id => user.id
+
+    cannot [:update,:destroy], Comment
+    can [:update,:destroy], Comment, :user_id => user.id
+    #@user_id=user.id
+    #can :update, Post
+    #cannot :update, Post do |post|
+    #    File.write('current_user_authorization_test', 'Only Here...')
+    #    post.try(:user_id) != @user_id
+    #end
+    #cannot :update, Post
+    #can :update, Post, :user => {:id => @user_id}
+
+    #    File.write('current_user_authorization_test', 'Here...')
+    #    post.try(:user_id) == user.id
+    #end
+    #can :update, Comment do |comment|
+    #    comment.try(:user) == user
+    #end
+    #can :destroy, Post do |post|
+    #    post.try(:user) == user
+    #end
+    #can :destory, Comment do |comment|
+    #    comment.try(:user) == user
+    #end
   end
 end

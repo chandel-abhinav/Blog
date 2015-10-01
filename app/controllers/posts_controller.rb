@@ -23,9 +23,9 @@ class PostsController < ApplicationController
 
 	def show
 		#@article = Post.find(params[:id])
-		commentable = Post.friendly.find(params[:id])
-		@article = commentable
-		@comments = commentable.comments.all
+		@article = Post.friendly.find(params[:id])
+		#@article = commentable
+		@comments = @article.comments.all
 		@tags = @article.tag
 	end
 
@@ -43,23 +43,39 @@ class PostsController < ApplicationController
 	end
 
 	def destroy
+	  #authorize! :destroy, Post
 	  @article = Post.find(params[:id])
+	  authorize! :destroy, @article
 	  @article.destroy
 	  redirect_to posts_path
 	end
 
-	def print_session
-		
+	def edit
+	  #authorize! :update, Post
+	  @article = Post.friendly.find(params[:id])
+	  authorize! :update, @article
+	  @tags = @article.tag
+	end
+
+	def update
+	  #authorize! :update, Post
+	  @article = Post.find(params[:id])
+	  authorize! :update, @article
+	  if @article.update(blog_params)
+	    redirect_to @article
+	  else
+	    render 'edit'
+	  end
 	end
 
 
 	private
 	def blog_params
-		params.require(:article).permit(:title,:body,:tag_list)
+		params.require(:article).permit(:title,:body,:tag_list,:user_id)
 	end
 
 	def comment_params
-		params.require(:comment).permit(:article_id,:title,:comment)
+		params.require(:comment).permit(:article_id,:title,:comment,:user_id)
 	end
 
 

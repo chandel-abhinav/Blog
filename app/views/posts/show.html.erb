@@ -18,6 +18,11 @@
 <h2>Comments</h2>
 <% @comments.each do |comment| %>
   <p>
+  	<strong>Commenter</strong>
+  	<%= User.find(comment.user_id).email %>
+  </p>
+
+  <p>
     <strong>Comment Title:</strong>
     <%= comment.title %>
   </p>
@@ -41,6 +46,7 @@
   <p>
   	 <%= f.hidden_field :commentable_id, :value => @article[:id] %>
   	 <%= f.hidden_field :commentable_type, :value => 'Post' %>
+  	 <%= f.hidden_field :user_id, :value => current_user.id %>
   </p>
   <p>
     <%= f.submit %>
